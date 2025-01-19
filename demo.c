@@ -1,8 +1,41 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+int sent_packet(int packt){
+    printf("Sending; Sending packet %d ..", packt);
+    return packt;
+}
+
+int recieve_packt(int packt, float loss_probabilty){
+    if((rand()%100) < (loss_probabilty*100)){
+        printf("Reciever: packet %d lost", packt);
+        return 0;
+    }
+
+    printf("Reciever: packet %d recieved successfully", packt);
+    return 1;
+}
+
 void stop_wait(int total_packts, int loss_probablity){
-    
+    int packt=1;
+
+    while(packt <= total_packts){
+        int sent=send_packt(packt);
+
+        if(recieve_packt(sent, loss_probablity)){
+            send_ack(sent);
+
+            if(recieve_ack(sent, loss_probablity)){
+                packt++;
+            }else{
+                printf("Sender: Resending packt %d due to ack loss", packt);
+            }
+        }
+        else{
+            printf("Sender: Resending packet %d due to packet loss", packt);
+        }
+    }
+    printf("All packets send and acknowledged successfully");
 }
 
 int main(){
