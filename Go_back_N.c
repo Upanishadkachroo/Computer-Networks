@@ -41,7 +41,7 @@ int main(){
         }
         else{
             printf("Ack for packet %d not recieved, retransmitting from packet %d\n", base, base);
-            nxt_sq_no=base;
+            nxt_sq_no=base;//retranmit the base
         }
         sleep(1);//to simulate delay
     }
