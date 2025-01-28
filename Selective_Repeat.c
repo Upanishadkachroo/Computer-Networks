@@ -4,7 +4,7 @@
 
 int main()
 {
-    srand(time(NULL));
+    srand(time(NULL)); // Seed for random number generation
 
     int total_frames, window_size;
 
@@ -16,7 +16,7 @@ int main()
 
     int window_start = 0;
     int window_end = window_size - 1;
-    bool ack[total_frames];
+    bool ack[total_frames];// To track acknowledgments
 
     for (int i = 0; i < total_frames; i++)
     {
@@ -27,18 +27,20 @@ int main()
 
     while (window_start < total_frames)
     {
+        // Send frames in the current window
         for (int i = window_start; i <= window_end && i < total_frames; i++)
         {
-            if (!ack[i])
+            if (!ack[i])// Send only if not already acknowledged
             {
                 printf("Sending frame: %d\n", i);
             }
         }
+        // Check for acknowledgments
         for (int i = window_start; i <= window_end && i < total_frames; i++)
         {
             if (!ack[i])
             {
-                if (rand() % 2)
+                if (rand() % 2)// Randomly generate success or failure
                 {
                     printf("Acknowledgemnet recieved from frame: %d\n", i);
                     ack[i] = true;
@@ -48,7 +50,7 @@ int main()
                     printf("acknowledment not recieved from frame: %d\n", i);
                 }
             }
-
+            // Slide the window forward
             while (ack[window_start] && window_start < total_frames)
             {
                 window_start++;
