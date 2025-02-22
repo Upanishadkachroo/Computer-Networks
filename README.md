@@ -1,7 +1,7 @@
 # Reliable Data Transfer Protocols Simulation
 
 ## Overview
-This repository contains C implementations of various reliable data transfer protocols used in computer networks. These protocols simulate packet transmission, acknowledgment handling, and error control mechanisms such as packet loss and retransmission.
+This repository contains C implementations of various reliable data transfer protocols used in computer networks. These protocols simulate packet transmission, acknowledgment handling, and error control mechanism such as packet loss and retransmission.
 
 ## Implemented Protocols
 ### 1. **Go-Back-N (GBN) Protocol**
